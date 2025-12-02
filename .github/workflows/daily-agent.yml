@@ -1,0 +1,27 @@
+name: daily-agent
+
+on:
+  schedule:
+    - cron: '50 23 * * *'  # ejecuta todos los días a las 23:50 UTC
+  workflow_dispatch: {}
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run agent
+        env:
+          TIKTOK_TOKEN: ${{ secrets.TIKTOK_TOKEN }}
+          FB_TOKEN: ${{ secrets.FB_TOKEN }}
+          ZAPIER_WEBHOOK: ${{ secrets.ZAPIER_WEBHOOK }}
+        run: python agent_daily.py
