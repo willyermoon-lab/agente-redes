@@ -2,7 +2,7 @@ name: daily-agent
 
 on:
   schedule:
-    - cron: '50 23 * * *'  # ejecuta todos los días a las 22:50 UTC
+    - cron: '50 23 * * *'  # ejecuta todos los días a las 21:50 UTC
   workflow_dispatch: {}
 
 jobs:
